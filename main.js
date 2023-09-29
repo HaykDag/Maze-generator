@@ -1,14 +1,14 @@
 
 const settings = {
-    canvasWidth: 1200,
-    canvasHeight:600,
-    rows: 30,
-    columns: 60,
+    canvasWidth: 800,
+    canvasHeight:400,
+    rows: 10,
+    columns: 20,
     startNode:{
         row:0,
         col:0
     },
-    nodeSize:20,
+    nodeSize:40,
 }
 
 //get canvas , context, set width and heigth
@@ -46,13 +46,16 @@ solveMazeBtn.addEventListener('click',()=>{
 })
 
 //reseting the board, just calling initializeGrid to reset everything
+const timeoutIds = [];
 resetBtn.addEventListener("click",()=>{
+    timeoutIds.forEach(id=>clearTimeout(id))
     initializeGrid(settings.rows,settings.columns);
 })
 
 
 
 function initializeGrid  (rows,columns){
+    ctx.clearRect(0,0,settings.canvasWidth,settings.canvasHeight)
     for(let i = 0;i<rows;i++){
         for(let j = 0;j<columns;j++){
             let node = null;
@@ -72,7 +75,7 @@ function initializeGrid  (rows,columns){
 const animate = (history)=>{
     for(let i = 0;i<history.length;i++){
         
-        setTimeout(()=>{
+        const timeoutId = setTimeout(()=>{
             if(i>0) {
                 history[i-1].isStartNode = false;
                 history[i-1].draw(ctx)
@@ -80,6 +83,7 @@ const animate = (history)=>{
             history[i].isStartNode = true;
             history[i].draw(ctx);
         },5*i)
+    timeoutIds.push(timeoutId)
     }
 }
 
@@ -99,7 +103,7 @@ const animateSolve = (shortestPath) => {
     for (let j = 0; j < shortestPath.length; j++) {
         startNode.isPath = true;
         startNode.draw(ctx)
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             shortestPath[j].isPath = true;
             info.innerText = `Shortest path:${j+1}`;
             if(shortestPath[j+1]){
@@ -112,5 +116,6 @@ const animateSolve = (shortestPath) => {
                 shortestPath[j].draw(ctx,j,"vertical");
             }
         }, 50 * j);
+        timeoutIds.push(timeoutId)
     }
 };
