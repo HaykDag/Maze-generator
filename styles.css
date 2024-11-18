@@ -1,22 +1,25 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-canvas{
+
+canvas {
     margin-top: 15px;
-    background-color: #333;
+    background-color: #3E8E41;
 }
-.btn-cnt{
+
+.btn-cnt {
     margin-top: 15px;
     display: flex;
     justify-content: center;
-    
+
     align-items: center;
     gap: 10px;
 }
-button{
+
+button {
     font-size: 1rem;
     padding: 5px;
     border-radius: 5px;
@@ -24,4 +27,8 @@ button{
     height: 30px;
     background-color: #333;
     color: white;
+}
+
+input {
+    max-width: 80px;
 }

@@ -1,5 +1,5 @@
 
-function generateMaze (grid,start,ctx){
+function generateMaze (grid,start){
     const visitedNodes = [];
     const history = [];
     let unvistedNode = getAllNodes(grid);
@@ -26,14 +26,14 @@ function generateMaze (grid,start,ctx){
             if(visitedNodes.length===0) return history;
             current.isStartNode = false;
             history.push(current)
-            //current.draw(ctx);
+            
             current = visitedNodes.pop();
             current.isStartNode = true;
             history.push(current)
-            //current.draw(ctx);
-        }else if (current){
+            
+        }else if(current){
 
-            let choise = randomChoise(neighbors.length)
+            let choise = randomChoise(neighbors.length);
             let next = neighbors[choise];
             
             removeWalls(current,next);
@@ -45,12 +45,12 @@ function generateMaze (grid,start,ctx){
             current.isVisited = true;
             visitedNodes.push(current);
             history.push(current)
-            //current.draw(ctx);
+           
             current = next;
             current.isStartNode = true;
             current.isVisited = true;
             history.push(current)
-            //current.draw(ctx);
+            
         }
     }
     
@@ -58,7 +58,7 @@ function generateMaze (grid,start,ctx){
 }
 
 function randomChoise(max){
-    return Math.floor(Math.random()*(max))
+    return Math.floor(Math.random()*max);
 }
 
 function removeWalls(current,neighbor){
@@ -69,7 +69,7 @@ function removeWalls(current,neighbor){
         if(current.col - neighbor.col === 1){
             current.walls[3] = false;
             neighbor.walls[1] = false;
-            //righ neighbor
+            //right neighbor
         }else if(current.col - neighbor.col === -1){
             current.walls[1] = false;
             neighbor.walls[3] = false;

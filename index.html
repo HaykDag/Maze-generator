@@ -11,7 +11,13 @@
     <div class="btn-cnt">
         <button id="mazeBtn">Generate Maze</button>
         <button id="solveMazeBtn">Solve the Maze</button>
-        <button id="resetBtn">Reset</button>
+        <label>Rows</label>
+        <input type="range" min="3" max="30" step="1" value="8" onchange="setRows(this.value)"></input>
+        <label>Columns</label>
+        <input type="range" min="3" max="40" step="1" value="15" onchange="setColumns(this.value)"></input>
+        <label>Speed</label>
+        <input type="range" min="1" max="10" step="1" value="5" onchange="setSpeed(this.value)"></input>
+        <button id="resetBtn" onclick="reset()">Reset</button>
     </div>
     <canvas id="myCanvas"></canvas>
     <div class="info-cnt">
